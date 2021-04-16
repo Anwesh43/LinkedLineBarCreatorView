@@ -201,4 +201,13 @@ class LineBarCreatorView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : LineBarCreatorView {
+            val lineBarCreatorView : LineBarCreatorView = LineBarCreatorView(activity)
+            activity.setContentView(lineBarCreatorView)
+            return lineBarCreatorView
+        }
+    }
 }

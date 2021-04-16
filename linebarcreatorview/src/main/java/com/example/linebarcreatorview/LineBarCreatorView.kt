@@ -176,4 +176,27 @@ class LineBarCreatorView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : LineBarCreatorView) {
+
+        private val animator : Animator = Animator(view)
+        private val lbc : LineBarCreator = LineBarCreator(0)
+        private val paint : Paint = Paint(Paint.ANTI_ALIAS_FLAG)
+
+        fun render(canvas : Canvas) {
+            canvas.drawColor(backColor)
+            lbc.draw(canvas, paint)
+            animator.animate {
+                lbc.update {
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            lbc.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
